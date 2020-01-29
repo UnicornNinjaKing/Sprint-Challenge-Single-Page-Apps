@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function WelcomePage() {
   return (
@@ -11,9 +11,10 @@ export default function WelcomePage() {
           src="https://rickandmortyapi.com/api/character/avatar/1.jpeg"
           alt="rick"
         />
+        <Link className="main-buttons" to={"/characters"}>
+          See Characters
+        </Link>
       </header>
-      {/* <Link to="/Character">Enter</Link> */}
-      {/* <Route exact path="/Character" component={CharacterList} /> */}
     </section>
   );
 }

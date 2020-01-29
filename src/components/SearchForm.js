@@ -1,39 +1,34 @@
 import React, { useState } from "react";
 
-export default function SearchForm(props) {
-  const [inputValue, setInputValue] = useState("");
+function SearchForm(props) {
+  const [results, setResults] = useState();
 
-  const handleInputChange = event => {
-    setInputValue(event.target.value);
+  const handleChanges = e => {
+    setResults(e.target.value);
   };
 
-  let searchStuff = event => {
-    event.preventDefault();
-    console.log(props.data);
-    props.data.map(letter => {
-      // console.log(letter.name);
-      if (letter.name === inputValue.toString()) {
-        console.log("found it!");
-      } else {
-        console.log(inputValue);
-      }
+  const submitHandler = e => {
+    e.preventDefault();
+
+    const charSearch = props.characters.filter(char => {
+      return char.name.toLowerCase().indexOf(results.toLowerCase()) !== -1;
     });
+    props.search(charSearch);
+    console.log(charSearch);
   };
 
   return (
     <section className="search-form">
-      <form>
+      <form onSubmit={submitHandler}>
         <input
+          onChange={handleChanges}
           type="text"
-          onChange={handleInputChange}
-          placeholder="name"
-          value={inputValue}
-          name="name"
-        />
-        <button onClick={searchStuff} type="submit">
-          Search
-        </button>
+          name="character"
+          id="character"
+          placeholder="Search"
+        ></input>
       </form>
     </section>
   );
 }
+export default SearchForm;
